@@ -10,21 +10,21 @@ Ta aplikacja zapewnia intuicyjny interfejs do tworzenia niestandardowych przepis
 
 ### Interaktywne Zarządzanie Składnikami
 
-> GIFy prezentujące działanie funkcjonalności znajdują się w `/Nutrients-test/functionality-gifs`
+> GIFy prezentujące działanie funkcjonalności znajdują się w `/functionality-gifs`
 
 - **Interfejs Drag & Drop**: Płynne przenoszenie składników z panelu składników do panelu przepisu
-![Interfejs drag and drop](/Nutrients-test/functionality-gifs/Dodawanie-skladnikow-drag-n-drop.gif)
+![Interfejs drag and drop](/functionality-gifs/Dodawanie-skladnikow-drag-n-drop.gif)
 - **Podwójne kliknięcie w skłądnik**: w liście składników można podwójnie kliknąc w ikone wybranego składnika aby automatycznie przenieść na panel przepisu, bez potrzeby przenoszenia
-![Interfejs double click](/Nutrients-test/functionality-gifs/Dodawanie-skladnikow-double-click.gif)
+![Interfejs double click](/functionality-gifs/Dodawanie-skladnikow-double-click.gif)
 - **Elastyczne Układanie**: Zmiana kolejności składników w przepisie poprzez przeciąganie ich na nowe pozycje
-![Elastyczne układanie](/Nutrients-test/functionality-gifs/Przestawianie-skladnikow-i-usuwanie.gif)
+![Elastyczne układanie](/functionality-gifs/Przestawianie-skladnikow-i-usuwanie.gif)
 - **Dynamiczna Kontrola Ilości**: Dostosowywanie ilości składników za pomocą wygodnych suwaków lub podwójnego kliknięcia w etykiety ilości
-![Dynamiczna kontrola ilości](/Nutrients-test/functionality-gifs/Aktualizacja-wartosci-po-zmianach-gramatury.gif)
+![Dynamiczna kontrola ilości](/functionality-gifs/Aktualizacja-wartosci-po-zmianach-gramatury.gif)
 - **Aktualizacje w Czasie Rzeczywistym**: Wartości odżywcze aktualizują się natychmiast podczas modyfikowania składników i ilości
 - **Usuwanie wybranych składników**: Wybrane składniki można usuwać zarówno pojedynczo poprzez użycie przycisku "X", jak i hurtowo dzięki przyciskowi "wyczyść", który usuwa wszystkie wybrane wcześniej składniki 
 
 ### Zaawansowane Filtrowanie i Wyszukiwanie
-![Filtrowanie i wyszukiwanie](/Nutrients-test/functionality-gifs/Filtrowanie-skladnikow.gif)
+![Filtrowanie i wyszukiwanie](/functionality-gifs/Filtrowanie-skladnikow.gif)
 - **Filtrowanie Kategorii**: Filtrowanie składników według typu, w tym mięso, produkty mleczne, warzywa, zboża, owoce i tłuszcze
 - **Sortowanie Alfabetyczne**: Przeglądanie składników alfabetycznie dla szybkiej nawigacji
 - **Inteligentne Wyszukiwanie**: Używanie pola wyszukiwania do szybkiego znajdowania konkretnych składników według nazwy
