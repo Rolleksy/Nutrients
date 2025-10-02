@@ -1,16 +1,16 @@
 @use '../../styles/colors' as light;
 @use '../../styles/dark-colors' as dark;
 
+/* Główny kontener podsumowania przepisu */
 .recipe-summary-container {
   width: 100%;
-  padding: 0 0 1.5rem 0;  // Dodany bottom padding 1.5rem
+  padding: 0 0 2rem 0;
   border: none;
   border-radius: 12px;
   
-  // Frosted glass effect
-  background: light.$bg-panel !important;  // 70% opacity
-  backdrop-filter: blur(10px) !important;            // Blur efekt
-  -webkit-backdrop-filter: blur(10px) !important;    // Safari support
+  background: light.$bg-panel !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
   
   box-shadow: 
     8px 8px 16px rgba(0, 0, 0, 0.15),
@@ -18,11 +18,12 @@
   font-family: 'Roboto Condensed', sans-serif;
 }
 
+/* Nagłówek podsumowania z paskiem gradientowym */
 .recipe-summary-container h2 {
   text-align: center;
-  margin: 0 1.5rem 0 1.5rem;       // Zero top margin
-  padding-top: 2rem;               // Top padding zamiast margin
-  padding-bottom: 1.5rem;          // Zwiększone z 1rem do 1.5rem (+0.5rem)
+  margin: 0 1.5rem 0 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
   color: light.$text-primary;
   font-size: 1.5rem;
   font-weight: 800;
@@ -30,31 +31,34 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   position: relative;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
   
-  // Pasek gradientowy pod nagłówkiem
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -0.75rem;
     left: 0;
     width: 100%;
     height: 6px;
     background: linear-gradient(
       to right,
-      light.$color-meat 0%, light.$color-meat 16.66%,      // Mięso
-      light.$color-vegetables 16.66%, light.$color-vegetables 33.33%,  // Warzywa
-      light.$color-dairy 33.33%, light.$color-dairy 50%,     // Wyroby mleczne
-      light.$color-grains 50%, light.$color-grains 66.66%,     // Zboża
-      light.$color-fruits 66.66%, light.$color-fruits 83.33%,  // Owoce
-      light.$color-fats 83.33%, light.$color-fats 100%     // Tłuszcze
+      light.$color-meat 0%, light.$color-meat 16.66%,
+      light.$color-vegetables 16.66%, light.$color-vegetables 33.33%,
+      light.$color-dairy 33.33%, light.$color-dairy 50%,
+      light.$color-grains 50%, light.$color-grains 66.66%,
+      light.$color-fruits 66.66%, light.$color-fruits 83.33%,
+      light.$color-fats 83.33%, light.$color-fats 100%
     );
-    border-radius: 8px;              // Border radius jak boxy (8px)
-    margin-bottom: 0.5rem;           // Minimalna przerwa
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
   }
 }
 
+/* Sekcje podsumowania */
 .summary-section {
-  margin: 0 1.5rem 1.5rem; // dodaję margin zamiast padding kontenera
+  margin: 2rem 1.5rem 1.5rem;
   padding: 1rem;
   background: light.$bg-white;
   border-radius: 8px;
@@ -126,6 +130,7 @@
 .ingredient-name {
   font-weight: 500;
   color: light.$text-primary;
+  font-size: 0.95rem;
 }
 
 .ingredient-type {
@@ -161,6 +166,7 @@
   gap: 0.75rem;
 }
 
+/* Efekt neomorphic dla elementów odżywczych */
 .nutrition-item {
   display: flex;
   align-items: center;
@@ -168,7 +174,7 @@
   border-radius: 6px;
   box-shadow: 
     4px 4px 8px rgba(0, 0, 0, 0.1),
-    -4px -4px 8px rgba(255, 255, 255, 0.6); // subtelny neomorphic dla nutrition items
+    -4px -4px 8px rgba(255, 255, 255, 0.6);
   transition: transform 0.2s;
 }
 
@@ -218,7 +224,7 @@
 .no-ingredients {
   text-align: center;
   padding: 2rem;
-  margin: 0 1.5rem 1.5rem; // dodaję margin dla spójności z innymi sekcjami
+  margin: 0 1.5rem 1.5rem;
   color: light.$text-muted;
 }
 
@@ -234,7 +240,7 @@
   line-height: 1.5;
 }
 
-// Responsive design
+/* Responsive design */
 @media (max-width: 768px) {
   .nutrition-grid {
     grid-template-columns: 1fr;
@@ -243,54 +249,60 @@
   .recipe-summary-container {
     padding: 1rem;
   }
+  
+  .recipe-summary-container h2 {
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
 }
 
-// Dark Mode Styles
+/* Dark Mode Styles */
 .dark-mode .recipe-summary-container {
-  background: dark.$bg-panel !important;                      // Pełny kolor (bez opacity)
-  backdrop-filter: none !important;                    // Wyłącz blur w dark mode
-  -webkit-backdrop-filter: none !important;
-  color: dark.$text-primary;                                      // Nowa czcionka
+  background: dark.$bg-panel-frosted !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: dark.$text-primary;
   box-shadow: 
-    8px 8px 16px rgba(69, 104, 130, 0.4),             // #456882 box shadow
+    8px 8px 16px rgba(69, 104, 130, 0.4),
     -8px -8px 16px rgba(69, 104, 130, 0.1);
 }
 
 .dark-mode .recipe-summary-container h2 {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .summary-section {
-  background: dark.$bg-panel;                                 // Nowe tło paneli
-  border: 1px solid dark.$border-light;                           // #456882 box shadow
+  background: dark.$bg-panel;
+  border: 1px solid dark.$border-light;
 }
 
 .dark-mode .summary-section h3 {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .nutrition-item {
-  background: dark.$bg-panel;                                 // Nowe tło paneli
+  background: dark.$bg-panel;
   border: none;
   box-shadow: 
-    4px 4px 8px rgba(69, 104, 130, 0.3),              // #456882 box shadow
+    4px 4px 8px rgba(69, 104, 130, 0.3),
     -4px -4px 8px rgba(69, 104, 130, 0.05);
 }
 
 .dark-mode .nutrition-label {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .nutrition-value {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .stat-label {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .stat-value {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .stat-value.highlight {
@@ -298,7 +310,7 @@
 }
 
 .dark-mode .no-ingredients {
-  color: dark.$text-primary;                                      // Nowa czcionka
+  color: dark.$text-primary;
 }
 
 .dark-mode .ingredients-table thead {

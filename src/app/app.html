@@ -1,9 +1,9 @@
 <div class="app-container" [class.dark-mode]="isDarkMode()">
   <div class="header">
-    <h1>POLICZ WARTOŚCI ODŻYWCZE</h1>
-    <button class="theme-toggle" (click)="toggleDarkMode()" [title]="isDarkMode() ? 'Przełącz na tryb dzienny' : 'Przełącz na tryb nocny'">
-      {{ isDarkMode() ? '☀️' : '🌙' }}
-    </button>
+    <h1>
+      <span class="line-1">ROZKODUJ</span>
+      <span class="line-2">SWÓJ POSIŁEK</span>
+    </h1>
   </div>
     <!-- scena threejs -->
     <div class="scene-container">
@@ -23,7 +23,8 @@
         [ingredientTypes]="ingredientTypes"
         [selectedIngredientType]="selectedIngredientType"
         (ingredientDropped)="onAddIngredient($event)"
-        (typeSelected)="selectIngredientType($event)">
+        (typeSelected)="selectIngredientType($event)"
+        (ingredientDoubleClicked)="onAddIngredient($event)">
       </app-ingredients-list>
       <!-- summary po prawej -->
       <app-recipe-summary

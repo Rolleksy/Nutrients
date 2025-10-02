@@ -19,6 +19,7 @@ export class IngredientsList {
   
   @Output() ingredientDropped = new EventEmitter<Ingredient>();
   @Output() typeSelected = new EventEmitter<IngredientType | null>();
+  @Output() ingredientDoubleClicked = new EventEmitter<Ingredient>();
 
   // Nowe właściwości dla wyszukiwania
   searchTerm: string = '';
@@ -114,6 +115,10 @@ export class IngredientsList {
     this.searchTerm = '';
     this.selectedLetter = null;
     this.selectType(null);
+  }
+
+  onIngredientDoubleClick(ingredient: Ingredient) {
+    this.ingredientDoubleClicked.emit(ingredient);
   }
 }
 

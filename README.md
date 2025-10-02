@@ -1,59 +1,95 @@
-# NutrientsTest
+# Kalkulator Wartości Odżywczych
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+Webowa aplikacja do obliczania wartości odżywczych posiłków, zbudowana w Angular i TypeScript, zaprojektowana aby pomóc użytkownikom komponować posiłki i łatwo obliczać ich wartości odżywcze.
 
-## Development server
+## Przegląd
 
-To start a local development server, run:
+Ta aplikacja zapewnia intuicyjny interfejs do tworzenia niestandardowych przepisów i analizowania ich zawartości odżywczej. Użytkownicy mogą przeglądać obszerną bazę danych składników, budować spersonalizowane posiłki i śledzić podstawowe informacje odżywcze poprzez interaktywny interfejs drag-and-drop.
 
-```bash
-ng serve
-```
+## Główne Funkcjonalności
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Interaktywne Zarządzanie Składnikami
+- **Interfejs Drag & Drop**: Płynne przenoszenie składników z panelu składników do panelu przepisu
+![Interfejs drag and drop](/Nutrients-test/functionality-gifs/Dodawanie-skladnikow-drag-n-drop.gif)
+- **Podwójne kliknięcie w skłądnik**: w liście składników można podwójnie kliknąc w ikone wybranego składnika aby automatycznie przenieść na panel przepisu, bez potrzeby przenoszenia
+![Interfejs double click](/Nutrients-test/functionality-gifs/Dodawanie-skladnikow-double-click.gif)
+- **Elastyczne Układanie**: Zmiana kolejności składników w przepisie poprzez przeciąganie ich na nowe pozycje
+![Elastyczne układanie](/Nutrients-test/functionality-gifs/Przestawianie-skladnikow-i-usuwanie.gif)
+- **Dynamiczna Kontrola Ilości**: Dostosowywanie ilości składników za pomocą wygodnych suwaków lub podwójnego kliknięcia w etykiety ilości
+![Dynamiczna kontrola ilości](/Nutrients-test/functionality-gifs/Aktualizacja-wartosci-po-zmianach-gramatury.gif)
+- **Aktualizacje w Czasie Rzeczywistym**: Wartości odżywcze aktualizują się natychmiast podczas modyfikowania składników i ilości
+- **Usuwanie wybranych składników**: Wybrane składniki można usuwać zarówno pojedynczo poprzez użycie przycisku "X", jak i hurtowo dzięki przyciskowi "wyczyść", który usuwa wszystkie wybrane wcześniej składniki 
 
-## Code scaffolding
+### Zaawansowane Filtrowanie i Wyszukiwanie
+![Filtrowanie i wyszukiwanie](/Nutrients-test/functionality-gifs/Filtrowanie-skladnikow.gif)
+- **Filtrowanie Kategorii**: Filtrowanie składników według typu, w tym mięso, produkty mleczne, warzywa, zboża, owoce i tłuszcze
+- **Sortowanie Alfabetyczne**: Przeglądanie składników alfabetycznie dla szybkiej nawigacji
+- **Inteligentne Wyszukiwanie**: Używanie pola wyszukiwania do szybkiego znajdowania konkretnych składników według nazwy
+- **Wizualne Kodowanie Kolorami**: Każda kategoria składników ma charakterystyczne kolory dla łatwego rozpoznawania
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Kompleksowa Analiza Odżywcza
+- **Kompletne Podsumowanie Przepisu**: Przeglądanie całkowitych wartości odżywczych dla całej kompozycji posiłku
+- **Szczegółowy Rozkład**: Dostęp do kompletnych informacji odżywczych, w tym kalorie, białka, węglowodany i tłuszcze
+- **Analiza Składnik po Składniku**: Zobacz indywidualny wkład odżywczy każdego komponentu przepisu
 
-```bash
-ng generate component component-name
-```
+### Ulepszone Doświadczenie Użytkownika
+- **Wizualizacja 3D**: Wciągająca scena 3D napędzana przez Three.js z renderowaniem animowanego modelu jedzenia
+- **Responsywny Design**: Zoptymalizowany interfejs, który działa płynnie na komputerach stacjonarnych i urządzeniach mobilnych
+- **Efekty Matowego Szkła**: Nowoczesny interfejs z efektami rozmycia tła i neomorficznymi elementami designu
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Stack Technologiczny
 
-```bash
-ng generate --help
-```
+- **Framework Frontend**: Angular 20.3 ze standalone komponentami
+- **Język**: TypeScript 5.0 dla zwiększonego bezpieczeństwa typów
+- **Renderowanie 3D**: Three.js dla grafiki 3D przyspieszonej przez WebGL
+- **Stylowanie**: SCSS z modularnym zarządzaniem kolorami i responsywnym designem
+- **Funkcje Interaktywne**: Angular CDK dla funkcjonalności drag-and-drop
+- **System Budowania**: Vite dla szybkiego developmentu i zoptymalizowanych buildów produkcyjnych
 
-## Building
+## Rozpoczęcie Pracy
 
-To build the project run:
+1. Sklonuj repozytorium
+2. Zainstaluj zależności komendą `npm install`
+3. Uruchom serwer deweloperski komendą `npm start`
+4. Przejdź do `http://localhost:4200` aby rozpocząć budowanie przepisów
 
-```bash
-ng build
-```
+## Przewodnik Użytkowania
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Budowanie Przepisu
+1. **Przeglądaj Składniki**: Eksploruj obszerną bazę danych składników w lewym panelu
+2. **Zastosuj Filtry**: Użyj filtrów kategorii lub sortowania alfabetycznego do znajdowania konkretnych składników
+3. **Funkcja Wyszukiwania**: Wpisz nazwy składników w polu wyszukiwania dla szybkiego dostępu
+4. **Dodaj Składniki**: Przeciągnij składniki z listy do panelu przepisu
+5. **Dostosuj Ilości**: Użyj suwaków lub podwójnie kliknij wartości aby modyfikować ilości składników
+6. **Zmień Kolejność Elementów**: Przeciągaj składniki w panelu przepisu aby zmienić ich kolejność
+7. **Usuń Składniki**: Przeciągnij elementy z powrotem do listy składników lub użyj przycisku usuwania
 
-## Running unit tests
+### Analiza Odżywcza
+Aplikacja automatycznie oblicza i wyświetla:
+- Całkowite kalorie dla kompletnego przepisu
+- Rozkład makroskładników (białka, węglowodany, tłuszcze)
+- Indywidualny wkład składników
+- Aktualizacje w czasie rzeczywistym podczas modyfikowania przepisu
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Funkcje Wizualne
+- Kodowane kolorami kategorie składników dla łatwej identyfikacji
+- Animowany model 3D jedzenia dla zwiększonej atrakcyjności wizualnej
+- Płynne przejścia i animacje w całym interfejsie
+- Responsywny układ, który dostosowuje się do różnych rozmiarów ekranu
 
-```bash
-ng test
-```
+## Architektura Projektu
 
-## Running end-to-end tests
+Aplikacja przestrzega nowoczesnych najlepszych praktyk Angular z architekturą opartą na komponentach:
 
-For end-to-end (e2e) testing, run:
+- **Modularny Design**: Oddzielne komponenty dla zarządzania składnikami, kompozycji przepisów i analizy odżywczej
+- **Bezpieczeństwo Typów**: Kompleksowe interfejsy TypeScript dla wszystkich struktur danych
 
-```bash
-ng e2e
-```
+## Funkcje Deweloperskie
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- **Hot Reload**: Natychmiastowa informacja zwrotna podczas developmentu
+- **Moduły CSS**: Zakresowe stylowanie z preprocessingiem SCSS
+- **Testowanie**: Kompleksowe pokrycie testami jednostkowymi z Jasmine i Karma
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*Rozpocznij eksplorację odżywiania poprzez interaktywne tworzenie przepisów i odkryj wartość odżywczą swoich ulubionych kombinacji posiłków.*

@@ -124,6 +124,7 @@
         [cdkDragData]="ing"
         class="ingredient-draggable"
         [style.border-left]="'8px solid ' + ing.ingredientType.color"
+        (dblclick)="onIngredientDoubleClick(ing)"
       >
         <span class="ingredient-name">{{ ing.name }}</span>
         <span class="ingredient-type">({{ ing.ingredientType.name }})</span>
