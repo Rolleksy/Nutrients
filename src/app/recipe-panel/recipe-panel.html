@@ -1,0 +1,39 @@
+<div class="recipe-panel-container">
+  <div class="recipe-panel-header">
+    <h2>Panel składników</h2>
+    <button 
+      *ngIf="selectedIngredients.length > 0"
+      class="clear-all-button" 
+      (click)="clearAll()"
+      title="Wyczyść wszystkie składniki">
+      Wyczyść
+    </button>
+  </div>
+
+  <div 
+    class="recipe-panel-list" 
+    cdkDropList
+    id="recipePanel"
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="selectedIngredients"
+    [cdkDropListConnectedTo]="['ingredientsList']"
+    [cdkDropListAutoScrollDisabled]="false"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <div class="no-ingredients" *ngIf="selectedIngredients.length === 0">
+      <span class="plus-icon">+</span>
+      <span class="empty-text">Przeciągnij składniki tutaj!</span>
+    </div>
+
+    <ng-container *ngFor="let si of selectedIngredients; let i = index; trackBy: trackByIngredient">
+      <app-ingredient-card
+        [ingredient]="si.ingredient"
+        [(grams)]="si.grams"
+        (removeIngredient)="onRemoveIngredient($event)"
+        cdkDrag
+        [cdkDragData]="si"
+        [cdkDragDisabled]="false">
+      </app-ingredient-card>
+    </ng-container>
+  </div>
+</div>

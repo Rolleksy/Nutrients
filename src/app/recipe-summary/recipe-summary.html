@@ -1,0 +1,79 @@
+<div class="recipe-summary-container">
+  <h2>Podsumowanie przepisu</h2>
+  
+  <!-- Informacje ogólne -->
+  <div class="summary-section general-info">
+    <h3>Składniki</h3>
+    <div class="stat-item">
+      <span class="stat-label">Liczba składników:</span>
+      <span class="stat-value">{{ ingredientsCount }}</span>
+    </div>
+    <div class="stat-item total-weight">
+      <span class="stat-label">Łączna waga:</span>
+      <span class="stat-value highlight">{{ totalGrams | number:'1.0-0' }} g</span>
+    </div>
+    
+    <!-- Tabela składników -->
+    <div class="ingredients-table" *ngIf="selectedIngredients.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Składnik</th>
+            <th>Typ</th>
+            <th>Ilość</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let si of selectedIngredients">
+            <td class="ingredient-name">{{ si.ingredient.name }}</td>
+            <td class="ingredient-type" [style.color]="si.ingredient.ingredientType.color">
+              {{ si.ingredient.ingredientType.name }}
+            </td>
+            <td class="ingredient-grams">{{ si.grams }} g</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Wartości odżywcze -->
+  <div class="summary-section nutrition-info">
+    <h3>Wartości odżywcze</h3>
+    
+    <div class="nutrition-grid">
+      <div class="nutrition-item calories">
+        <div class="nutrition-content">
+          <span class="nutrition-label">Kalorie</span>
+          <span class="nutrition-value">{{ totalCalories | number:'1.0-0' }} kcal</span>
+        </div>
+      </div>
+
+      <div class="nutrition-item protein">
+        <div class="nutrition-content">
+          <span class="nutrition-label">Białko</span>
+          <span class="nutrition-value">{{ totalProtein | number:'1.0-0' }} g</span>
+        </div>
+      </div>
+
+      <div class="nutrition-item carbs">
+        <div class="nutrition-content">
+          <span class="nutrition-label">Węglowodany</span>
+          <span class="nutrition-value">{{ totalCarbs | number:'1.0-0' }} g</span>
+        </div>
+      </div>
+
+      <div class="nutrition-item fat">
+        <div class="nutrition-content">
+          <span class="nutrition-label">Tłuszcze</span>
+          <span class="nutrition-value">{{ totalFat | number:'1.0-0' }} g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Komunikat gdy brak składników -->
+  <div class="no-ingredients" *ngIf="selectedIngredients.length === 0">
+    <p>Dodaj składniki do przepisu, aby zobaczyć podsumowanie wartości odżywczych</p>
+  </div>
+</div>
+

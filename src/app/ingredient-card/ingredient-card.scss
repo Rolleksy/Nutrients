@@ -1,0 +1,218 @@
+@use '../../styles/colors' as light;
+@use '../../styles/dark-colors' as dark;
+
+.ingredient-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;    // Zwiększone do 180px
+    max-width: 180px;    // Stała szerokość 180px
+    border: none;        // usuwam border dla efektu neomorphic
+    border-radius: 8px;
+    padding: 0;         // usuwam padding, żeby color-bar był na krawędzi
+    background: light.$bg-white;  // Białe tło
+    box-shadow: none;   // Brak box-shadow
+    font-family: 'Roboto Condensed', sans-serif; // zmiana na Roboto Condensed
+    flex-shrink: 0; // żeby się nie ściskało
+    margin: 0; // usuwam margin - gap w grid zapewni odstępy
+    overflow: hidden;   // żeby color-bar nie wystawał poza zaokrąglenie
+    cursor: default; // Domyślny kursor - NIE można przeciągać za kartę
+    
+    // Hover effect - taki sam jak w ingredients-list
+    &:hover:not(.cdk-drag-dragging) {
+        background-color: light.$bg-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: all 150ms ease;
+    }
+}
+
+.color-bar {
+    height: 24px; // zwiększam wysokość dla przycisku
+    width: 100%;
+    border-radius: 8px 8px 0 0; // zaokrąglenie tylko góra
+    display: flex;
+    justify-content: flex-start; // przycisk po lewej stronie
+    align-items: center;
+    padding: 0 16px 0 12px; // asymetryczny padding - więcej z prawej (16px)
+    cursor: grab; // Pokaż że można przeciągać
+    user-select: none; // Zapobiegaj zaznaczaniu tekstu podczas drag
+}
+
+.color-bar:active {
+    cursor: grabbing; // Podczas przeciągania
+}
+
+// Style dla CDK drag handle
+.color-bar.cdk-drag-handle {
+    cursor: grab !important;
+}
+
+.color-bar.cdk-drag-handle:active {
+    cursor: grabbing !important;
+}
+
+.ingredient-header {
+    display: flex;
+    justify-content: center; // h3 na środku
+    padding: 1rem 1rem 0.5rem; // padding dla zawartości
+}
+
+.ingredient-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.remove-button {
+    background: rgba(255, 255, 255, 0.9); // półprzezroczyste białe tło
+    border: none;
+    border-radius: 6px;
+    width: 16px;          // Zmniejszone z 20px do 16px
+    height: 16px;         // Zmniejszone z 20px do 16px
+    font-size: 0.7rem;    // Zmniejszone z 0.8rem do 0.7rem
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: light.$text-dark;
+    transition: all 0.2s;
+    font-weight: bold;
+    margin-left: auto; // przesuwa przycisk na prawą stronę ale zostaje w obszarze
+    margin-right: 22px; // Zwiększone z 12px do 22px (10px w lewo)
+}
+
+.remove-button:hover {
+    background: rgba(255, 255, 255, 1);
+    color: light.$accent-red;       // Czerwony kolor
+    font-weight: 900;     // Większe pogrubienie
+    transform: scale(1.1); // Lekkie powiększenie zamiast zmniejszenia
+}
+
+.ingredient-card-controls {
+    display: flex;
+  flex-direction: column;
+  align-items: center; // wyśrodkowanie horyzontalne
+  margin: 1rem 0;
+  padding: 0 1rem; // padding dla zawartości
+    // wyśrodkowane horyzontalnie, label pod inputem, input musi mieć inną stylizację
+}
+.ingredient-card-controls input[type="range"] {
+  width: 100%;
+  max-width: 180px;
+  margin-bottom: 0.5rem;
+
+  -webkit-appearance: none; /* usunięcie defaultowego stylu */
+  appearance: none; /* standard property */
+  height: 6px;
+  border-radius: 5px;
+  background: light.$slider-track;
+  outline: none;
+  transition: background 0.3s;
+}
+
+
+.ingredient-card-controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: light.$slider-thumb-light;
+  cursor: pointer;
+}
+
+.ingredient-card-controls input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 8px;
+  background: light.$slider-thumb-dark;
+  cursor: pointer;
+}
+
+.grams-value {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: light.$bg-button-hover;
+  }
+}
+
+.grams-input {
+  width: 60px;
+  padding: 2px 4px;
+  border: 2px solid light.$accent-teal;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  
+  &:focus {
+    border-color: light.$accent-teal-dark;
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+  }
+}
+
+.ingredient-card-values {
+    margin-top: auto;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 0 1rem 1rem; // dodaję marginesy z boków i dołu
+  background: light.$bg-values; // trochę ciemniejsze tło
+  border-radius: 8px;
+    // wyśrodkowane, z troche ciemniejszym tłem niż cała ingredient-card, ten sam border radius
+}
+
+.ingredient-card-values p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+// Dark Mode Styles
+.dark-mode .ingredient-card {
+  background: dark.$bg-panel;                                 // Nowe tło paneli
+  color: dark.$text-dark;                                      // Czcionka w kolorze tła aplikacji
+  box-shadow: 
+    8px 8px 16px rgba(69, 104, 130, 0.4),             // #456882 box shadow
+    -8px -8px 16px rgba(69, 104, 130, 0.1);
+}
+
+.dark-mode .ingredient-card:hover {
+  background-color: dark.$border-light;                           // #456882 box shadow
+  border-color: dark.$text-dark;                               // Czcionka w kolorze tła aplikacji
+}
+
+.dark-mode .ingredient-card.cdk-drag-preview {
+  background-color: dark.$border-light;                           // #456882 box shadow
+  border-color: dark.$text-dark;                               // Czcionka w kolorze tła aplikacji
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+}
+
+.dark-mode .ingredient-card-values {
+  background: dark.$bg-panel;                                 // Nowe tło paneli
+  color: dark.$text-dark;                                      // Czcionka w kolorze tła aplikacji
+}
+
+.dark-mode .remove-button {
+  background: rgba(27, 60, 83, 0.15);                  // #1B3C53 z opacity
+  color: dark.$text-dark;                                      // Czcionka w kolorze tła aplikacji
+}
+
+.dark-mode .remove-button:hover {
+  background: rgba(27, 60, 83, 0.25);                  // #1B3C53 z większą opacity
+  transform: scale(0.9);
+  box-shadow: inset 0 2px 4px rgba(69, 104, 130, 0.6);  // #456882 box shadow
+}
+
+.dark-mode .remove-btn {
+  background-color: #d32f2f;
+  color: dark.$bg-white;
+}
+
+.dark-mode .remove-btn:hover {
+  background-color: #b71c1c;
+}

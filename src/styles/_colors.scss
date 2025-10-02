@@ -1,0 +1,94 @@
+// ============================================
+// PALETA KOLORÓW - TRYB JASNY (LIGHT MODE)
+// ============================================
+
+// === Kolory typów składników (Gradient) ===
+$color-meat: #FF6B6B;           // Mięso
+$color-vegetables: #4ECDC4;     // Warzywa  
+$color-dairy: #45B7D1;          // Wyroby mleczne
+$color-grains: #FFA07A;         // Zboża
+$color-fruits: #98D8C8;         // Owoce
+$color-fats: #F7DC6F;           // Tłuszcze
+
+// === Tła i powierzchnie ===
+$bg-white: #ffffff;
+$bg-light-gray: #f9f9f9;
+$bg-light-hover: #e8e8e8;         // Hover background
+$bg-medium-gray: #f5f5f5;
+$bg-panel: rgba(242, 242, 242, 0.7);  // Frosted glass
+$bg-hover: #e8e8e8;
+$bg-input: #f8f9fa;
+$bg-values: #eaeaea;
+$bg-button-hover: #f0f0f0;
+
+// === Bordy i linie ===
+$border-light: #ddd;
+$border-medium: #ccc;
+$border-gray: #eee;
+$border-input: #ddd;
+$border-active: #333;
+
+// === Teksty ===
+$text-dark: #333;
+$text-primary: #2c3e50;
+$text-secondary: #34495e;
+$text-gray: #666;
+$text-light-gray: #999;
+$text-muted: #7f8c8d;
+
+// === Akcenty i UI ===
+$accent-teal: #4ECDC4;
+$accent-teal-dark: #3ab7af;
+$accent-green: #4caf50;
+$accent-green-success: #28a745;
+$accent-green-dark: #1e7e34;
+$accent-green-light: #27ae60;
+$accent-red: #e74c3c;
+$accent-red-dark: #c0392b;
+$accent-blue: #007bff;
+
+// === Range slider ===
+$slider-track: #ddd;
+$slider-track-bg: #ddd;           // Alias dla slider-track
+$slider-thumb-light: #17283a;
+$slider-thumb-dark: #494949;
+
+// === Scrollbary ===
+$scrollbar-track: #dee2e6;
+$scrollbar-track-light: #dee2e6;  // Alias dla scrollbar-track
+$scrollbar-thumb: #adb5bd;
+$scrollbar-thumb-hover: #a8a8a8;
+$scrollbar-track-alt: #f1f1f1;
+$scrollbar-thumb-alt: #c1c1c1;
+$scrollbar-thumb-alt-hover: #b0b0b0;
+
+// === Letter buttons (alfabetyczne) ===
+$letter-inactive: #6c757d;
+$letter-disabled-bg: #e9ecef;
+$letter-disabled-text: #495057;
+$letter-active-bg: #007bff;
+$letter-disabled-light: #ced4da;
+$letter-all-green: #28a745;
+$letter-all-bg: #e8f5e8;
+$letter-all-text: #1e7e34;
+
+// === Tabele (recipe-summary) ===
+$table-border: #f1f2f6;
+$table-header-border: #dee2e6;
+$table-header-dark: #222222;
+$table-row-bg: #f8f9fa;
+
+// === Nutrition highlights ===
+$nutrition-calories-bg: #ffe0e0;
+$nutrition-protein-bg: #e0f0ff;
+$nutrition-carbs-bg: #fff0e0;
+$nutrition-fat-bg: #e0ffe0;
+
+// ============================================
+// DARK MODE - Osobny plik _colors-dark.scss
+// ============================================
+// Dark mode kolory (dla przyszłego użycia):
+// $dark-bg-app: #1B3C53
+// $dark-bg-panel: #234C6A
+// $dark-shadow: #456882
+// $dark-text: #D2C1B6

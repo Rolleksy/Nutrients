@@ -1,0 +1,93 @@
+// ============================================
+// PALETA KOLORÓW - TRYB CIEMNY (DARK MODE)
+// ============================================
+
+// === Kolory typów składników (Gradient) - te same co w light mode ===
+$color-meat: #FF6B6B;           // Mięso
+$color-vegetables: #4ECDC4;     // Warzywa  
+$color-dairy: #45B7D1;          // Wyroby mleczne
+$color-grains: #FFA07A;         // Zboża
+$color-fruits: #98D8C8;         // Owoce
+$color-fats: #F7DC6F;           // Tłuszcze
+
+// === Tła i powierzchnie ===
+$bg-app: #1B3C53;               // Główne tło aplikacji
+$bg-panel: #234C6A;             // Tło paneli
+$bg-panel-frosted: rgba(255, 255, 255, 0.7);  // Białe frosted glass dla recipe-panel
+$bg-card: #234C6A;              // Tło kart składników
+$bg-hover: #2a5a7a;             // Hover na elementach
+$bg-light-hover: #2a5a7a;       // Alias dla bg-hover
+$bg-input: #1e4a63;             // Tło inputów
+$bg-values: #2a5a7a;            // Tło wartości
+$bg-button-hover: #2a5a7a;      // Hover na przyciskach
+$bg-white: #ffffff;             // Biały (dla niektórych elementów)
+$bg-card-white: rgba(255, 255, 255, 0.7);  // Białe karty z transparencją
+
+// === Bordy i linie ===
+$border-light: #456882;         // Jasny border (cień)
+$border-medium: #3a5a75;        // Średni border
+$border-gray: #2a4a65;          // Szary border
+$border-input: #456882;         // Border inputów
+$border-active: #D2C1B6;        // Aktywny border
+
+// === Teksty ===
+$text-primary: #D2C1B6;         // Główny tekst
+$text-dark: #1B3C53;            // Ciemny tekst (na jasnych elementach)
+$text-secondary: #c5b5a8;       // Drugorzędny tekst
+$text-gray: #a89e94;            // Szary tekst
+$text-light-gray: #8e857c;      // Jasny szary tekst
+$text-muted: #7a7169;           // Wyciszony tekst
+
+// === Akcenty i UI ===
+$accent-teal: #4ECDC4;          // Teal (warzywa)
+$accent-teal-dark: #3ab7af;     // Ciemniejszy teal
+$accent-green: #4caf50;         // Zielony
+$accent-green-success: #28a745; // Sukces
+$accent-green-dark: #1e7e34;    // Ciemny zielony
+$accent-green-light: #27ae60;   // Jasny zielony
+$accent-red: #e74c3c;           // Czerwony
+$accent-red-dark: #c0392b;      // Ciemny czerwony
+$accent-blue: #007bff;          // Niebieski
+
+// === Range slider ===
+$slider-track: #2a4a65;         // Track slidera
+$slider-track-bg: #2a4a65;      // Alias dla slider-track
+$slider-thumb-light: #D2C1B6;   // Jasny thumb
+$slider-thumb-dark: #a89e94;    // Ciemny thumb
+
+// === Scrollbary ===
+$scrollbar-track: #1e4a63;      // Track scrollbara
+$scrollbar-track-light: #1e4a63; // Alias dla scrollbar-track
+$scrollbar-thumb: #456882;      // Thumb scrollbara
+$scrollbar-thumb-hover: #5a7a95; // Hover thumb
+$scrollbar-track-alt: #2a4a65;  // Alternatywny track
+$scrollbar-thumb-alt: #3a5a75;  // Alternatywny thumb
+$scrollbar-thumb-alt-hover: #4a6a85; // Hover alternatywny thumb
+
+// === Letter buttons (alfabetyczne) ===
+$letter-inactive: #6c7d8d;      // Nieaktywny przycisk
+$letter-disabled-bg: #2a4a65;   // Tło wyłączonego
+$letter-disabled-text: #5a6a7a; // Tekst wyłączonego
+$letter-active-bg: #007bff;     // Aktywne tło
+$letter-disabled-light: #3a5a75; // Jasny wyłączony
+$letter-all-green: #28a745;     // Zielony "Wszystkie"
+$letter-all-bg: #1e4a3d;        // Tło "Wszystkie"
+$letter-all-text: #4caf50;      // Tekst "Wszystkie"
+$letter-all-hover: #2a5a4a;     // Hover "Wszystkie"
+
+// === Tabele (recipe-summary) ===
+$table-border: #2a4a65;         // Border tabeli
+$table-header-border: #3a5a75;  // Border nagłówka
+$table-header-dark: #D2C1B6;    // Ciemny nagłówek (tekst)
+$table-row-bg: #1e4a63;         // Tło wiersza
+
+// === Nutrition highlights ===
+$nutrition-calories-bg: rgba(255, 107, 107, 0.2);  // Kalorie
+$nutrition-protein-bg: rgba(69, 183, 209, 0.2);    // Białko
+$nutrition-carbs-bg: rgba(255, 160, 122, 0.2);     // Węglowodany
+$nutrition-fat-bg: rgba(152, 216, 200, 0.2);       // Tłuszcze
+
+// === Cienie i efekty ===
+$shadow-default: #456882;       // Domyślny cień
+$shadow-hover: rgba(0, 0, 0, 0.15); // Cień hover
+$shadow-card: rgba(0, 0, 0, 0.2);   // Cień karty

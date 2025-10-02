@@ -1,0 +1,347 @@
+@use '../../styles/colors' as light;
+@use '../../styles/dark-colors' as dark;
+
+.recipe-summary-container {
+  width: 100%;
+  padding: 0 0 1.5rem 0;  // Dodany bottom padding 1.5rem
+  border: none;
+  border-radius: 12px;
+  
+  // Frosted glass effect
+  background: light.$bg-panel !important;  // 70% opacity
+  backdrop-filter: blur(10px) !important;            // Blur efekt
+  -webkit-backdrop-filter: blur(10px) !important;    // Safari support
+  
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.15),
+    -8px -8px 16px rgba(255, 255, 255, 0.7);
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.recipe-summary-container h2 {
+  text-align: center;
+  margin: 0 1.5rem 0 1.5rem;       // Zero top margin
+  padding-top: 2rem;               // Top padding zamiast margin
+  padding-bottom: 1.5rem;          // Zwiększone z 1rem do 1.5rem (+0.5rem)
+  color: light.$text-primary;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Pathway Extreme', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  
+  // Pasek gradientowy pod nagłówkiem
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      light.$color-meat 0%, light.$color-meat 16.66%,      // Mięso
+      light.$color-vegetables 16.66%, light.$color-vegetables 33.33%,  // Warzywa
+      light.$color-dairy 33.33%, light.$color-dairy 50%,     // Wyroby mleczne
+      light.$color-grains 50%, light.$color-grains 66.66%,     // Zboża
+      light.$color-fruits 66.66%, light.$color-fruits 83.33%,  // Owoce
+      light.$color-fats 83.33%, light.$color-fats 100%     // Tłuszcze
+    );
+    border-radius: 8px;              // Border radius jak boxy (8px)
+    margin-bottom: 0.5rem;           // Minimalna przerwa
+  }
+}
+
+.summary-section {
+  margin: 0 1.5rem 1.5rem; // dodaję margin zamiast padding kontenera
+  padding: 1rem;
+  background: light.$bg-white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-section h3 {
+  margin: 0 0 1rem 0;
+  color: light.$text-secondary;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-bottom: 2px solid light.$table-header-dark;
+  padding-bottom: 0.5rem;
+}
+
+.general-info .stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid light.$table-border;
+}
+
+.general-info .stat-item:last-child {
+  border-bottom: none;
+}
+
+.ingredients-table {
+  margin-top: 1rem;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ingredients-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.ingredients-table thead {
+  background-color: light.$table-row-bg;
+}
+
+.ingredients-table th {
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  color: light.$text-secondary;
+  border-bottom: 2px solid light.$table-header-border;
+}
+
+.ingredients-table tbody tr {
+  border-bottom: 1px solid light.$table-border;
+  transition: background-color 0.2s;
+}
+
+.ingredients-table tbody tr:hover {
+  background-color: light.$table-row-bg;
+}
+
+.ingredients-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ingredients-table td {
+  padding: 0.75rem 0.5rem;
+}
+
+.ingredient-name {
+  font-weight: 500;
+  color: light.$text-primary;
+}
+
+.ingredient-type {
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.ingredient-grams {
+  text-align: right;
+  font-weight: 600;
+  color: light.$accent-green-light;
+}
+
+.stat-label {
+  color: light.$text-muted;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: light.$text-primary;
+}
+
+.stat-value.highlight {
+  color: light.$accent-green-light;
+  font-size: 1.1rem;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.nutrition-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 6px;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.1),
+    -4px -4px 8px rgba(255, 255, 255, 0.6); // subtelny neomorphic dla nutrition items
+  transition: transform 0.2s;
+}
+
+.nutrition-item:hover {
+  transform: translateY(-2px);
+}
+
+.nutrition-item.calories {
+  background: light.$nutrition-calories-bg;
+}
+
+.nutrition-item.protein {
+  background: light.$nutrition-protein-bg;
+}
+
+.nutrition-item.carbs {
+  background: light.$nutrition-carbs-bg;
+}
+
+.nutrition-item.fat {
+  background: light.$nutrition-fat-bg;
+}
+
+.nutrition-icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+.nutrition-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.nutrition-label {
+  font-size: 0.85rem;
+  color: light.$text-secondary;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.nutrition-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: light.$text-primary;
+}
+
+.no-ingredients {
+  text-align: center;
+  padding: 2rem;
+  margin: 0 1.5rem 1.5rem; // dodaję margin dla spójności z innymi sekcjami
+  color: light.$text-muted;
+}
+
+.no-ingredients-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.no-ingredients p {
+  margin: 0;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .nutrition-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .recipe-summary-container {
+    padding: 1rem;
+  }
+}
+
+// Dark Mode Styles
+.dark-mode .recipe-summary-container {
+  background: dark.$bg-panel !important;                      // Pełny kolor (bez opacity)
+  backdrop-filter: none !important;                    // Wyłącz blur w dark mode
+  -webkit-backdrop-filter: none !important;
+  color: dark.$text-primary;                                      // Nowa czcionka
+  box-shadow: 
+    8px 8px 16px rgba(69, 104, 130, 0.4),             // #456882 box shadow
+    -8px -8px 16px rgba(69, 104, 130, 0.1);
+}
+
+.dark-mode .recipe-summary-container h2 {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .summary-section {
+  background: dark.$bg-panel;                                 // Nowe tło paneli
+  border: 1px solid dark.$border-light;                           // #456882 box shadow
+}
+
+.dark-mode .summary-section h3 {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .nutrition-item {
+  background: dark.$bg-panel;                                 // Nowe tło paneli
+  border: none;
+  box-shadow: 
+    4px 4px 8px rgba(69, 104, 130, 0.3),              // #456882 box shadow
+    -4px -4px 8px rgba(69, 104, 130, 0.05);
+}
+
+.dark-mode .nutrition-label {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .nutrition-value {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .stat-label {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .stat-value {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .stat-value.highlight {
+  color: dark.$accent-green;
+}
+
+.dark-mode .no-ingredients {
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .ingredients-table thead {
+  background-color: dark.$table-row-bg;
+}
+
+.dark-mode .ingredients-table th {
+  color: dark.$text-primary;
+  border-bottom: 2px solid dark.$table-header-border;
+}
+
+.dark-mode .ingredients-table tbody tr {
+  border-bottom: 1px solid dark.$table-border;
+}
+
+.dark-mode .ingredients-table tbody tr:hover {
+  background-color: dark.$table-row-bg;
+}
+
+.dark-mode .ingredient-name {
+  color: dark.$text-primary;
+}
+
+.dark-mode .ingredient-grams {
+  color: dark.$accent-green-light;
+}
+
+.dark-mode .general-info .stat-item {
+  border-bottom: 1px solid dark.$table-border;
+}
+
+.dark-mode .nutrition-item.calories {
+  background: dark.$nutrition-calories-bg;
+}
+
+.dark-mode .nutrition-item.protein {
+  background: dark.$nutrition-protein-bg;
+}
+
+.dark-mode .nutrition-item.carbs {
+  background: dark.$nutrition-carbs-bg;
+}
+
+.dark-mode .nutrition-item.fat {
+  background: dark.$nutrition-fat-bg;
+}

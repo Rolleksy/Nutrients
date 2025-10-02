@@ -1,0 +1,134 @@
+<div class="ingredients-list-container">
+  <h2>
+    Wybierz składniki 
+    <span class="ingredients-count" *ngIf="filteredIngredients.length > 0">
+      ({{ filteredIngredients.length }})
+    </span>
+  </h2>
+  
+  <!-- Pole wyszukiwania -->
+  <div class="search-container">
+    <div class="search-input-wrapper">
+      <input 
+        type="text" 
+        class="search-input"
+        placeholder="Szukaj składników..."
+        [(ngModel)]="searchTerm"
+      />
+      <button 
+        *ngIf="searchTerm" 
+        class="clear-search-btn"
+        (click)="clearSearch()"
+        title="Wyczyść wyszukiwanie">
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <!-- Przyciski wyboru typów składników -->
+  <div class="ingredient-types">
+    <button 
+      class="type-button"
+      [class.active]="!selectedIngredientType"
+      (click)="selectType(null)">
+      Wszystkie
+    </button>
+    <button 
+      *ngFor="let type of ingredientTypes"
+      class="type-button"
+      [class.active]="isTypeSelected(type)"
+      [style.background-color]="type.color"
+      (click)="selectType(type)">
+      {{ type.name }}
+    </button>
+  </div>
+
+  <!-- Informacja o aktywnych filtrach -->
+  <div class="filter-info" *ngIf="hasActiveFilters">
+    <span class="results-count">
+      Znaleziono: {{ filteredIngredients.length }} składnik(ów)
+      <span *ngIf="selectedLetter"> na literę "{{ selectedLetter }}"</span>
+    </span>
+    <button class="clear-all-btn" (click)="clearAllFilters()">
+      Wyczyść wszystkie filtry
+    </button>
+  </div>
+
+  <!-- Główny kontener z alfabetem i listą -->
+  <div class="main-content">
+    <!-- Panel alfabetu -->
+    <div class="alphabet-panel">
+      <button 
+        class="letter-button all-button"
+        [class.active]="!selectedLetter"
+        (click)="selectLetter(null)"
+        title="Wszystkie składniki">
+        Ø
+      </button>
+      <button 
+        *ngFor="let letter of alphabet"
+        class="letter-button"
+        [class.active]="isLetterSelected(letter)"
+        [class.disabled]="!hasIngredientsForLetter(letter)"
+        [disabled]="!hasIngredientsForLetter(letter)"
+        (click)="selectLetter(letter)"
+        [title]="'Składniki na literę ' + letter">
+        {{ letter }}
+      </button>
+    </div>
+
+    <!-- Lista składników -->
+    <div
+      class="ingredients-list-list"
+      cdkDropList
+      id="ingredientsList"
+      [cdkDropListData]="filteredIngredients"
+      [cdkDropListConnectedTo]="['recipePanel']"
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      <!-- Brak wyników -->
+      <div *ngIf="!hasResults" class="no-results">
+        <div class="no-results-icon">🔍</div>
+        <div class="no-results-text">
+          <span *ngIf="searchTerm && !selectedIngredientType && !selectedLetter">
+            Nie znaleziono składników dla "{{ searchTerm }}"
+          </span>
+          <span *ngIf="!searchTerm && selectedIngredientType && !selectedLetter">
+            Brak składników w kategorii "{{ selectedIngredientType.name }}"
+          </span>
+          <span *ngIf="!searchTerm && !selectedIngredientType && selectedLetter">
+            Brak składników na literę "{{ selectedLetter }}"
+          </span>
+          <span *ngIf="searchTerm && selectedIngredientType && !selectedLetter">
+            Nie znaleziono składników dla "{{ searchTerm }}" w kategorii "{{ selectedIngredientType.name }}"
+          </span>
+          <span *ngIf="searchTerm && !selectedIngredientType && selectedLetter">
+            Nie znaleziono składników dla "{{ searchTerm }}" na literę "{{ selectedLetter }}"
+          </span>
+          <span *ngIf="!searchTerm && selectedIngredientType && selectedLetter">
+            Brak składników w kategorii "{{ selectedIngredientType.name }}" na literę "{{ selectedLetter }}"
+          </span>
+          <span *ngIf="searchTerm && selectedIngredientType && selectedLetter">
+            Nie znaleziono składników dla "{{ searchTerm }}" w kategorii "{{ selectedIngredientType.name }}" na literę "{{ selectedLetter }}"
+          </span>
+          <span *ngIf="!searchTerm && !selectedIngredientType && !selectedLetter">
+            Brak składników do wyświetlenia
+          </span>
+        </div>
+      </div>
+
+      <!-- Składniki -->
+      <div
+        *ngFor="let ing of filteredIngredients"
+        cdkDrag
+        [cdkDragData]="ing"
+        class="ingredient-draggable"
+        [style.border-left]="'8px solid ' + ing.ingredientType.color"
+      >
+        <span class="ingredient-name">{{ ing.name }}</span>
+        <span class="ingredient-type">({{ ing.ingredientType.name }})</span>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,319 @@
+﻿@use '../../styles/colors' as light;
+@use '../../styles/dark-colors' as dark;
+
+.recipe-panel-container {
+  width: 100%;
+  min-height: 300px;
+  height: auto;
+  margin: 0;
+  padding: 0 0 1.5rem 0;
+  
+  border: none;
+  border-radius: 12px;
+  
+  // Frosted glass effect - taki sam jak w recipe-summary i ingredients-list
+  background: light.$bg-panel !important;  // 70% opacity
+  backdrop-filter: blur(10px) !important;            // Blur efekt
+  -webkit-backdrop-filter: blur(10px) !important;    // Safari support
+  
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.15),
+    -8px -8px 16px rgba(255, 255, 255, 0.7);
+  font-family: 'Roboto Condensed', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.recipe-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.recipe-panel-header h2 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+  font-family: 'Pathway Extreme', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+}
+
+.clear-all-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: light.$bg-white;
+  color: light.$accent-red;
+  border: 2px solid light.$accent-red;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Pathway Extreme', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.clear-all-button:hover {
+  background-color: light.$accent-red;
+  color: light.$bg-white;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.recipe-panel-title {
+  text-align: center; 
+  color: light.$text-gray;
+  margin: 1rem;
+  font-family: 'Pathway Extreme', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.no-ingredients {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 200px;
+  width: 60%;               // 60% szerokości kontenera
+  max-width: 60%;           // Maksymalnie 60%
+  padding: 3rem;
+  border: 2px dashed light.$border-medium;
+  border-radius: 8px;
+  background-color: light.$bg-light-gray;
+  color: light.$text-gray;
+  text-align: center;
+  flex-shrink: 0;           // Nie kurczaj się w flexbox
+  margin: 0 auto;           // Wyśrodkowanie w kontenerze
+}
+
+.plus-icon {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.empty-text {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.recipe-panel-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;        // KLUCZOWE: nie zawijaj - jedna linia pozioma
+  gap: 0.5rem;              // Zwiększone z 0.25rem do 0.5rem (8px)
+  margin: 1rem;
+  padding: 1rem 0.5rem;
+  padding-bottom: 2rem;
+  overflow-x: auto;         // Poziomy scroll
+  overflow-y: hidden;       // Zablokuj pionowy scroll
+  flex-grow: 1;
+  align-items: flex-start;
+  position: relative;
+  min-height: 200px;
+  
+  // Smooth scrolling
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  // Scrollbar styling
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// Beautiful Interactions - horizontal-only movement
+// Single, consistent timing for all cards - avoid conflicting animations
+.recipe-panel-list app-ingredient-card {
+  flex-shrink: 0;          // Nie kurczaj się
+  flex-grow: 0;            // Nie rośnij
+  width: 180px !important; // Fixed width 180px dla każdej karty
+  min-width: 180px !important;
+  max-width: 180px !important;
+  
+  // CSS transitions are interruptible (unlike CSS animations)
+  // TYLKO transform - ruch tylko w poziomie
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  position: relative;
+}
+
+// Faster response during active drag
+.recipe-panel-list.cdk-drop-list-dragging app-ingredient-card {
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Smooth drop animation
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+// Visual feedback for drag area - updated selectors
+.recipe-panel-list.cdk-drop-list-dragging {
+  border: 2px dashed light.$accent-green;
+  border-radius: 8px;
+}
+
+.recipe-panel-list.cdk-drop-list-receiving {
+  border: 2px solid light.$accent-green !important;
+  background-color: rgba(76, 175, 80, 0.05) !important;
+  border-radius: 8px;
+}
+
+// Preview - ghost of the dragged card following cursor
+.cdk-drag-preview {
+  opacity: 0.8 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  cursor: grabbing !important;
+  z-index: 1000 !important;
+  
+  // Maintain card dimensions - 180px jak ingredient-card
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  
+  // CDK handles positioning, we just style it
+  position: fixed !important;
+  pointer-events: none !important;
+}
+
+// Placeholder - space left in the list where card will drop
+.cdk-drag-placeholder {
+  opacity: 0.5 !important;
+  border: 2px dashed light.$accent-green !important;
+  background: rgba(76, 175, 80, 0.1) !important;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Maintain size and positioning in flex layout - 180px jak ingredient-card
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  position: relative !important;  // Keep in flow
+}
+
+// Visual feedback during drag - actual card being dragged
+.cdk-drag-dragging {
+  opacity: 0.5 !important;  // Original card becomes ghost
+  cursor: grabbing;
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+}
+
+// Dark Mode Styles
+.dark-mode .recipe-panel-container {
+  background: dark.$bg-panel-frosted !important;     // Białe frosted glass
+  backdrop-filter: blur(10px) !important;              // Blur włączony
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: dark.$text-dark;                                      // Ciemny tekst na białym tle
+  box-shadow: 
+    8px 8px 16px rgba(69, 104, 130, 0.4),             // Cień z dark.$border-light
+    -8px -8px 16px rgba(69, 104, 130, 0.1);
+}
+
+.dark-mode .recipe-panel-header h2 {
+  color: dark.$text-dark;                                      // Ciemny tekst
+}
+
+.dark-mode .recipe-panel-title {
+  color: dark.$text-dark;                                      // Ciemny tekst
+}
+
+.dark-mode .clear-all-button {
+  background-color: dark.$bg-panel;
+  color: dark.$accent-red;
+  border-color: dark.$accent-red;
+}
+
+.dark-mode .clear-all-button:hover {
+  background-color: dark.$accent-red;
+  color: dark.$bg-white;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.dark-mode .recipe-panel-list {
+  &::-webkit-scrollbar-track {
+    background: rgba(69, 104, 130, 0.1);              // Oparty na dark.$border-light
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(69, 104, 130, 0.3);              // Oparty na dark.$border-light
+    
+    &:hover {
+      background: rgba(69, 104, 130, 0.5);
+    }
+  }
+}
+
+.dark-mode .recipe-panel-list.cdk-drop-list-dragging {
+  border-color: dark.$accent-green;
+}
+
+.dark-mode .recipe-panel-list.cdk-drop-list-receiving {
+  border-color: dark.$accent-green !important;
+  background-color: rgba(102, 187, 106, 0.08) !important;     // Jasny zielony z przezroczystością
+}
+
+.dark-mode .cdk-drag-preview {
+  box-shadow: 0 8px 24px rgba(69, 104, 130, 0.6) !important;  // Cień z dark.$border-light
+}
+
+.dark-mode .cdk-drag-placeholder {
+  border-color: dark.$accent-green !important;
+  background: rgba(102, 187, 106, 0.15) !important;           // Jasny zielony z przezroczystością
+}
+
+.dark-mode .no-ingredients {
+  border-color: dark.$border-light;
+  background-color: dark.$bg-panel;
+  color: dark.$text-primary;
+}
+
+.dark-mode .plus-icon {
+  color: dark.$text-primary;
+}
+
+.dark-mode .empty-text {
+  color: dark.$text-primary;
+}

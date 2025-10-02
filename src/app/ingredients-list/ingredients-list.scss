@@ -1,0 +1,570 @@
+@use '../../styles/colors' as light;
+@use '../../styles/dark-colors' as dark;
+
+.ingredients-list-container {
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  
+  // Frosted glass effect
+  background: light.$bg-panel !important;  // 70% opacity
+  backdrop-filter: blur(10px) !important;            // Blur efekt
+  -webkit-backdrop-filter: blur(10px) !important;    // Safari support
+  
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.15),
+    -8px -8px 16px rgba(255, 255, 255, 0.7);
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+}
+
+.ingredients-list-container h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;  // wyśrodkowanie horyzontalnie
+  gap: 0.5rem;
+  margin: 0 1rem 0 1rem;      // Zero top margin
+  padding-top: 1.5rem;        // Top padding zamiast margin
+  padding-bottom: 1.5rem;     // Zwiększone z 1rem do 1.5rem (+0.5rem)
+  text-align: center;       // wyśrodkowanie tekstu
+  font-family: 'Pathway Extreme', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  position: relative;
+  
+  // Pasek gradientowy pod nagłówkiem
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(
+      to right,
+      light.$color-meat 0%, light.$color-meat 16.66%,      // Mięso
+      light.$color-vegetables 16.66%, light.$color-vegetables 33.33%,  // Warzywa
+      light.$color-dairy 33.33%, light.$color-dairy 50%,     // Wyroby mleczne
+      light.$color-grains 50%, light.$color-grains 66.66%,     // Zboża
+      light.$color-fruits 66.66%, light.$color-fruits 83.33%,  // Owoce
+      light.$color-fats 83.33%, light.$color-fats 100%     // Tłuszcze
+    );
+    border-radius: 8px;              // Border radius jak boxy (8px)
+    margin-bottom: 0.5rem;           // Minimalna przerwa
+  }
+}
+
+.ingredients-count {
+  font-size: 0.8rem;
+  color: light.$text-gray;
+  font-weight: normal;
+  background-color: light.$bg-button-hover;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}
+
+.search-container {
+  margin: 0 1rem 1rem;    // dodaję margin zamiast padding kontenera
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  border: 2px solid light.$border-light;
+  border-radius: 8px;  // zmieniam z 25px na 8px jak w recipe-summary
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: light.$accent-teal;
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: light.$text-light-gray;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.clear-search-btn:hover {
+  background-color: light.$bg-button-hover;
+  color: light.$text-gray;
+}
+
+.filter-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem 1rem;     // dodaję padding z boków
+  padding: 0.5rem 1rem;
+  background-color: light.$bg-input;
+  border-radius: 8px;      // zmieniam z 4px na 8px jak w recipe-summary
+  font-size: 0.9rem;
+}
+
+.results-count {
+  color: light.$text-gray;
+  font-weight: 500;
+}
+
+.clear-all-btn {
+  padding: 0.25rem 0.75rem;
+  background-color: light.$accent-red;
+  color: light.$bg-white;
+  border: none;
+  border-radius: 6px;  // zmieniam z 15px na 6px jak w recipe-summary nutrition items
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clear-all-btn:hover {
+  background-color: light.$accent-red-dark;
+}
+
+.main-content {
+  display: flex;
+  gap: 0.5rem;          // zmniejszam z 1rem na 0.5rem
+  margin-top: 1rem;
+}
+
+.alphabet-panel {
+  flex: 0 0 40px;           // bardzo wąska szerokość 40px
+  display: flex;
+  flex-direction: column;
+  gap: 2px;                 // mniejszy gap
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0.25rem;         // mniejszy padding
+  margin-right: 1rem;       // dodaję margin z prawej strony
+  background-color: transparent; // usuwamy tło
+  border: none;             // usuwamy border
+  border-radius: 0;
+}
+
+.alphabet-title {
+  display: none;            // ukrywamy tytuł
+}
+
+.letter-button {
+  padding: 0.15rem;         // bardzo mały padding
+  border: none;             // usuwamy border
+  background-color: transparent; // przezroczyste tło
+  border-radius: 2px;       // małe zaokrąglenie
+  cursor: pointer;
+  font-size: 0.75rem;       // mniejsza czcionka
+  font-weight: 400;         // normalny font weight
+  text-align: center;
+  transition: all 0.15s;
+  min-height: 20px;         // mniejsza wysokość
+  width: 20px;              // stała szerokość
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: light.$letter-inactive;           // szary kolor tekstu
+  margin: 0 auto;           // centrowanie w panelu
+}
+
+.letter-button:hover:not(.disabled) {
+  background-color: light.$letter-disabled-bg;
+  color: light.$letter-disabled-text;
+  transform: scale(1.1);    // lekkie powiększenie
+}
+
+.letter-button.active {
+  background-color: light.$letter-active-bg;
+  color: light.$bg-white;
+  transform: scale(1.15);   // większe powiększenie dla aktywnego
+  box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+}
+
+.letter-button.disabled {
+  background-color: transparent;
+  color: light.$letter-disabled-light;           // bardzo jasny szary
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.letter-button.all-button {
+  background-color: transparent;
+  color: light.$letter-all-green;           // zielony kolor
+  border: none;
+  margin-bottom: 0.25rem;   // mały odstęp
+  font-size: 0.9rem;        // nieco większa czcionka dla symbolu
+  font-weight: 500;
+}
+
+.letter-button.all-button:hover {
+  background-color: light.$letter-all-bg;
+  color: light.$letter-all-text;
+  transform: scale(1.1);
+}
+
+.letter-button.all-button.active {
+  background-color: light.$letter-all-green;
+  color: light.$bg-white;
+  transform: scale(1.15);
+  box-shadow: 0 2px 4px rgba(40,167,69,0.3);
+}
+
+.ingredient-types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;  // wyśrodkowanie przycisków filtrów
+  gap: 0.5rem;
+  margin: 0 1rem 1rem;      // dodaję padding z boków
+  padding: 1rem;            // padding wewnętrzny dla backgroundu
+  border-bottom: 1px solid light.$border-gray;
+  background-color: light.$bg-input; // wspólny background jak search input
+  border-radius: 8px;        // takie same zaokrąglenie jak input (8px)
+}
+
+.type-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;  // zmieniam z 20px na 8px jak w recipe-summary
+  background-color: light.$bg-medium-gray;
+  color: light.$text-dark;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: 'Pathway Extreme', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.type-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.type-button.active {
+  border-color: light.$text-dark;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.ingredients-list-list {
+  flex: 1;                   // zajmuje resztę miejsca
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 kolumny o równej szerokości
+  grid-auto-rows: min-content; // rzędy tylko tak wysokie jak potrzeba
+  gap: 0.5rem;
+  max-height: 400px;         // stała wysokość
+  min-height: 200px;         // minimalna wysokość
+  padding: 1rem;             // podstawowy padding
+  margin: 0 1rem 1rem;       // dodaję padding z boków
+  border: 2px dashed light.$border-medium;
+  border-radius: 8px;        // zmieniam z 4px na 8px jak w recipe-summary
+  overflow-y: auto;          // scrollowanie pionowe
+  overflow-x: hidden;        // ukryj poziomy scroll
+  align-content: start;      // wyrównuj zawartość do góry
+}
+
+// Responsive - na mniejszych ekranach
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+  }
+  
+  .alphabet-panel {
+    flex: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: none;
+    overflow-y: visible;
+    justify-content: center;
+    padding: 0.5rem;
+    gap: 0.25rem;
+  }
+  
+  .letter-button {
+    margin: 0;              // usuwamy auto margin na mobile
+    width: auto;
+    min-width: 24px;
+    padding: 0.25rem 0.4rem;
+  }
+}
+
+// Responsive - na mniejszych ekranach 2 kolumny
+@media (max-width: 768px) {
+  .ingredients-list-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Na bardzo małych ekranach 1 kolumna
+@media (max-width: 480px) {
+  .ingredients-list-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Stylizacja scrollbara dla panelu alfabetu
+.alphabet-panel::-webkit-scrollbar {
+  width: 3px;
+}
+
+.alphabet-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.alphabet-panel::-webkit-scrollbar-thumb {
+  background: light.$scrollbar-track;
+  border-radius: 2px;
+}
+
+.alphabet-panel::-webkit-scrollbar-thumb:hover {
+  background: light.$scrollbar-thumb;
+}
+
+// Stylizacja scrollbara dla WebKit
+.ingredients-list-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients-list-list::-webkit-scrollbar-track {
+  background: light.$scrollbar-track-alt;
+  border-radius: 4px;
+}
+
+.ingredients-list-list::-webkit-scrollbar-thumb {
+  background: light.$scrollbar-thumb-alt;
+  border-radius: 4px;
+}
+
+.ingredients-list-list::-webkit-scrollbar-thumb:hover {
+  background: light.$scrollbar-thumb-hover;
+}
+
+.ingredient-draggable {
+  padding: 0.75rem;
+  background-color: light.$bg-light-gray;
+  border: 1px solid light.$border-light;
+  border-radius: 4px;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;    // układ pionowy w kartach
+  align-items: flex-start;   // wyrównanie do lewej
+  gap: 0.25rem;             // mniejszy gap
+  height: 80px;             // STAŁA wysokość
+  max-height: 80px;         // maksymalna wysokość
+  min-height: 80px;         // minimalna wysokość
+  text-align: left;
+  overflow: hidden;         // ukryj nadmiar tekstu
+  align-self: start;        // nie rozciągaj w grid
+}
+
+.ingredient-name {
+  font-weight: 500;
+  font-size: 1rem;          // Zwiększone z 0.9rem do 1rem
+  line-height: 1.2;
+  word-break: break-word;   // łamanie długich słów
+}
+
+.ingredient-type {
+  font-size: 0.85rem;       // Zwiększone z 0.75rem do 0.85rem
+  color: light.$text-gray;
+  font-style: italic;
+  margin-top: auto;         // przesuń na dół karty
+}
+
+.ingredient-draggable:hover {
+  background-color: light.$bg-light-hover;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.ingredient-draggable.cdk-drag-dragging {
+  cursor: grabbing;
+  transform: rotate(5deg);
+  opacity: 0.8;
+  
+  // DEBUG: Element z listy który jest przeciągany
+  // background: pink !important;
+  // border: 5px solid red !important;
+  // transform: rotate(5deg) scale(1.1) !important;
+}
+
+// Element podczas animacji powrotu - UKRYJ natychmiast!
+.ingredient-draggable.cdk-drag-animating {
+  transition: none !important;     // Wyłącz animację
+  opacity: 0 !important;           // Ukryj natychmiast
+  visibility: hidden !important;   // Całkowicie niewidoczny
+}
+
+// Preview - element który podąża za kursorem podczas przeciągania
+// Wygląda jak ingredient-card z recipe-panel z wycentrowanym tekstem
+.cdk-drag-preview {
+  box-sizing: border-box !important;
+  position: fixed !important;      // Pozwala CDK pozycjonować preview
+  pointer-events: none !important; // Wydarzenia myszy przechodzą przez preview
+  opacity: 0.8 !important;         // Przezroczystość dla wizualnej informacji zwrotnej
+  z-index: 1000 !important;        // Nad wszystkimi innymi elementami
+  transition: opacity 0ms !important; // Natychmiastowe zanikanie po drop
+  
+  // Wymiary ingredient-card - 180px
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  min-height: 280px !important;    // Minimalna wysokość jak ingredient-card
+  
+  // Styl neomorphic
+  padding: 0 !important;           // Bez paddingu (color-bar jest na krawędzi)
+  background: light.$bg-medium-gray !important;
+  border-radius: 8px !important;
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.15),
+    -6px -6px 12px rgba(255, 255, 255, 0.7),
+    0 5px 15px rgba(0,0,0,0.3) !important;
+  
+  // Wyłącz wszystkie interakcje
+  cursor: grabbing !important;
+  overflow: hidden !important;     // Dla color-bar
+  
+  // Wycentruj tekst w środku
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  // Większy, wycentrowany tekst
+  .ingredient-name {
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    padding: 1rem !important;
+    color: light.$text-dark !important;
+  }
+  
+  // Ukryj typ składnika w preview
+  .ingredient-type {
+    display: none !important;
+  }
+}
+
+// Placeholder - NIEWIDOCZNY - puste miejsce w liście podczas przeciągania
+.cdk-drag-placeholder {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.ingredients-list-list.cdk-drop-list-dragging {
+  border-color: light.$accent-green;
+  background-color: light.$bg-light-gray;
+  
+  // DEBUG: Lista ingredients podczas przeciągania z niej
+  // border: 5px solid lime !important;
+  // background-color: rgba(0, 255, 0, 0.1) !important;
+}
+
+.no-results {
+  grid-column: 1 / -1;      // rozciągnij na wszystkie kolumny
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: light.$text-gray;
+  background-color: light.$bg-light-gray;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.no-results-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-results-text {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+// Dark Mode Styles
+.dark-mode .ingredients-list-container {
+  background: dark.$bg-panel !important;                      // Pełny kolor (bez opacity)
+  backdrop-filter: none !important;                    // Wyłącz blur w dark mode
+  -webkit-backdrop-filter: none !important;
+  color: dark.$text-primary;                                      // Nowa czcionka
+  box-shadow: 
+    8px 8px 16px rgba(69, 104, 130, 0.4),             // #456882 box shadow
+    -8px -8px 16px rgba(69, 104, 130, 0.1);
+}
+
+.dark-mode .search-input {
+  background-color: dark.$bg-panel;                           // Nowe tło paneli
+  border-color: dark.$border-light;                               // #456882 box shadow
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .search-input::placeholder {
+  color: rgba(210, 193, 182, 0.6);                     // #D2C1B6 z opacity
+}
+
+.dark-mode .search-input:focus {
+  border-color: dark.$accent-green;
+}
+
+.dark-mode .type-button {
+  background-color: dark.$bg-panel;                           // Nowe tło paneli
+  color: dark.$text-primary;                                      // Nowa czcionka
+  border-color: transparent;
+}
+
+.dark-mode .type-button:hover {
+  background-color: dark.$border-light;                           // #456882 box shadow
+}
+
+.dark-mode .type-button.active {
+  border-color: dark.$text-primary;                               // Nowa czcionka
+}
+
+.dark-mode .filter-info {
+  background-color: dark.$bg-panel;                           // Nowe tło paneli
+  color: dark.$text-primary;                                      // Nowa czcionka
+}
+
+.dark-mode .ingredients-list-list {
+  border-color: dark.$border-light;                               // #456882 box shadow
+  background-color: dark.$bg-panel;                           // Nowe tło paneli
+}
+
+.dark-mode .letter-button {
+  background-color: dark.$bg-panel;                           // Nowe tło paneli
+  color: dark.$text-primary;                                      // Nowa czcionka
+  border-color: dark.$border-light;                               // #456882 box shadow
+}
+
+.dark-mode .letter-button:hover {
+  background-color: dark.$border-light;                           // #456882 box shadow
+}
+
+.dark-mode .letter-button.active {
+  background-color: dark.$accent-green;
+  color: dark.$bg-white;
+}

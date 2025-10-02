@@ -1,0 +1,38 @@
+<div class="ingredient-card">
+    <div class="color-bar" 
+         cdkDragHandle
+         [style.background-color]="ingredient.ingredientType.color">
+        <button class="remove-button" (click)="onRemove()" title="Usuń składnik">✕</button>
+    </div>
+    <div class="ingredient-header">
+        <h3>{{ ingredient.name }}</h3>
+    </div>
+    <div class="ingredient-card-controls">
+        <input type="range" min="0" max="500" [(ngModel)]="grams" (ngModelChange)="gramsChange.emit($event)">
+        <label>
+            Ilość: 
+            <span *ngIf="!isEditingGrams" 
+                  class="grams-value" 
+                  (dblclick)="startEditingGrams()"
+                  title="Kliknij dwukrotnie aby edytować">
+                {{ grams }}
+            </span>
+            <input *ngIf="isEditingGrams"
+                   type="number"
+                   class="grams-input"
+                   [(ngModel)]="tempGrams"
+                   (blur)="confirmGramsEdit()"
+                   (keydown)="onGramsInputKeydown($event)"
+                   min="0"
+                   max="500"
+                   autofocus>
+            g
+        </label>
+    </div>
+    <div class="ingredient-card-values">
+        <p>Kalorie: {{ calcCalories() | number:'1.0-0' }} kcal</p>
+        <p>Białko: {{ calcProtein() | number:'1.0-0' }} g</p>
+        <p>Węglowodany: {{ calcCarbs() | number:'1.0-0' }} g</p>
+        <p>Tłuszcze: {{ calcFat() | number:'1.0-0' }} g</p>
+    </div>
+</div>
