@@ -9,6 +9,9 @@ Ta aplikacja zapewnia intuicyjny interfejs do tworzenia niestandardowych przepis
 ## Główne Funkcjonalności
 
 ### Interaktywne Zarządzanie Składnikami
+
+> GIFy prezentujące działanie funkcjonalności znajdują się w `/Nutrients-test/functionality-gifs`
+
 - **Interfejs Drag & Drop**: Płynne przenoszenie składników z panelu składników do panelu przepisu
 ![Interfejs drag and drop](/Nutrients-test/functionality-gifs/Dodawanie-skladnikow-drag-n-drop.gif)
 - **Podwójne kliknięcie w skłądnik**: w liście składników można podwójnie kliknąc w ikone wybranego składnika aby automatycznie przenieść na panel przepisu, bez potrzeby przenoszenia
